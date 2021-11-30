@@ -7,8 +7,5 @@ export const ROUTES = {
 	MENU: "/menu/:restoId",
 	HOME: "/",
 	RESTAURANT_MANAGMENT: "/restaurante/:restoId",
-	NEARBY_RESTAURANTS: "/restaurantes_cercanos",
-	LOGIN: "/login",
-	BACKOFFICE_HOME: "/backoffice",
-	TABLE_STATUS: "/backoffice/:id/mesas",
+	NEARBY_RESTAURANTS: "/restaurantes_cercanos"
 };
