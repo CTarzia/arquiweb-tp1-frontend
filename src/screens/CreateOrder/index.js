@@ -99,7 +99,7 @@ const CreateOrder = () => {
 					<div>
 						<div className={styles.titleContainer}>
 							<Typography variant="h3" component="h1">{restaurantName}</Typography>
-							<GoBackButton route={ROUTES.HOME} />
+							<GoBackButton route={ROUTES.NEARBY_RESTAURANTS} />
 						</div>
 						<PostOrder
 							handleSubmit={handleSubmit}

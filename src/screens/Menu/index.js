@@ -3,9 +3,8 @@ import { useParams } from "react-router";
 import styles from "./styles.module.scss";
 import GoBackButton from "../../components/GoBack";
 import { ROUTES } from "../../constants/routes";
-import { Button, Typography} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-
 
 const Menu = () => {
 	const [restaurantName, setRestaurantName] = useState();
@@ -14,22 +13,22 @@ const Menu = () => {
 	const [menu, setMenu] = useState();
 	const [menuLoading, setMenuLoading] = useState(false);
 
-	const { restoId: restaurantId} = useParams();
+	const { restoId: restaurantId } = useParams();
 	const search = useLocation().search;
-	const tableId = new URLSearchParams(search).get('mesa');
+	const tableId = new URLSearchParams(search).get("mesa");
 
-	function showFile(blob){
+	function showFile(blob) {
 		// It is necessary to create a new blob object with mime-type explicitly set
 		// otherwise only Chrome works like it should
-		var newBlob = new Blob([blob], {type: "application/pdf"})
-	  
+		var newBlob = new Blob([blob], { type: "application/pdf" });
+
 		// IE doesn't allow using a blob object directly as link href
 		// instead it is necessary to use msSaveOrOpenBlob
-	
-		// For other browsers: 
+
+		// For other browsers:
 		// Create a link pointing to the ObjectURL containing the blob.
 		const data = window.URL.createObjectURL(newBlob);
-		var link = document.createElement('a');
+		var link = document.createElement("a");
 		link.href = data;
 		//link.download="file.pdf";
 		//link.click();
@@ -39,7 +38,7 @@ const Menu = () => {
 		//}, 100);
 		setMenu(data);
 		setMenuLoading(true);
-	};
+	}
 
 	useEffect(() => {
 		fetch(`https://ver-la-carta.herokuapp.com/restaurantes/${restaurantId}`)
@@ -50,7 +49,7 @@ const Menu = () => {
 					setRestaurantName("Su restaurante no ha sido encontrado.");
 				} else {
 					setRestaurantName(json.name);
-					setRestaurantLoading(true)
+					setRestaurantLoading(true);
 				}
 		});
 		fetch(`https://ver-la-carta.herokuapp.com/carta/${restaurantId}`,{responseType: "blob"})
@@ -72,35 +71,47 @@ const Menu = () => {
 		//	setMenu(url);
 		//	setMenuLoading(true);
 		//});
-	},[]);
+	}, []);
 
-	return (
-		restaurantLoading ? (
-			menuLoading ? (
-				<div>
-					<div className={styles.titleContainer}>
-						<Typography variant="h3" component="h1">{restaurantName}</Typography>
-						<GoBackButton route={ROUTES.HOME} />
-        			</div>
-					<Typography variant="h5" className={styles.subtitle}>
-							Menu
+	return restaurantLoading ? (
+		menuLoading ? (
+			<div>
+				<div className={styles.titleContainer}>
+					<Typography variant="h3" component="h1">
+						{restaurantName}
 					</Typography>
-					<div className={styles.menuButton}>					
-						
-						<object data={menu} type="application/pdf" width="60%" height="500px" />
+					<GoBackButton route={ROUTES.NEARBY_RESTAURANTS} />
+				</div>
+				<Typography variant="h5" className={styles.subtitle}>
+					Menu
+				</Typography>
+				<div className={styles.menuButton}>
+					<object
+						data={menu}
+						type="application/pdf"
+						width="60%"
+						height="500px"
+					/>
 
-				    	<Button variant="text" href={(tableId) ? (`/restaurante/${restaurantId}/hacer_pedido?mesa=${tableId}`) : (`/restaurante/${restaurantId}/hacer_pedido`)} className={styles.submitButton}> 
-        		    	    Hacer pedido
-        		    	</Button>
-					</div>			
-    			</div>
-			):(
-				<div>recuperando menu del restaurante</div>
-			)
+					<Button
+						variant="text"
+						href={
+							tableId
+								? `/restaurante/${restaurantId}/hacer_pedido?mesa=${tableId}`
+								: `/restaurante/${restaurantId}/hacer_pedido`
+						}
+						className={styles.submitButton}
+					>
+						Hacer pedido
+					</Button>
+				</div>
+			</div>
 		) : (
-			<div>Recuperando información del restaurante.</div>
+			<div>recuperando menu del restaurante</div>
 		)
-    );
+	) : (
+		<div>Recuperando información del restaurante.</div>
+	);
 };
 
 export default Menu;
