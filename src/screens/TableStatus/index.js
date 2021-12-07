@@ -38,7 +38,7 @@ const TableStatus = () => {
 						{`Numero de Mesa ${table.table_number}`}
 						<div>
 							<QRCode
-								value={`https://verlacarta6.herokuapp.com/restaurante/${restaurantId}/hacer_pedido?mesa=${table.table_number}`}
+								value={`/restaurante/${restaurantId}/hacer_pedido?mesa=${table.table_number}`}
 							/>
 						</div>
 					</div>
