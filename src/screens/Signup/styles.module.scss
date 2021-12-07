@@ -1,0 +1,66 @@
+@import "src/styles/_colors.scss";
+@import "src/styles/_styles.scss";
+
+.container {
+	align-items: center;
+	background-color: $light-tan;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.title {
+	display: flex;
+	background-color: $dark-green;
+	color: $light-green;
+	justify-content: center;
+	width: 100%;
+	padding: 20px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 450px;
+	align-items: center;
+	padding: 40px;
+	justify-content: center;
+}
+
+.input {
+	display: flex;
+	margin-bottom: 15px;
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
+	position: relative;
+}
+
+.label {
+	display: flex;
+	align-self: center;
+	margin-right: 10px;
+}
+
+.button {
+	@extend %button;
+	margin-top: 15px;
+	min-width: 300px;
+}
+
+.disabledButton {
+	@extend %button;
+	background-color: $light-gray;
+	margin-top: 15px;
+	min-width: 300px;
+
+	&:hover {
+		background-color: $light-gray;
+	}
+}
+
+.progress {
+	height: 15px !important;
+	width: 15px !important;
+	color: $gray !important;
+}

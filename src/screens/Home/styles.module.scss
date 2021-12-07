@@ -1,0 +1,32 @@
+@import "src/styles/_colors.scss";
+@import "src/styles/_styles.scss";
+
+.container {
+	align-items: center;
+	background-color: $light-tan;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.title {
+	display: flex;
+	background-color: $dark-green;
+	color: $light-green;
+	justify-content: center;
+	width: 100%;
+	padding: 20px;
+}
+
+.button {
+	@extend %button;
+	margin-top: 10px;
+	min-width: 300px;
+}
+
+.buttonsContainer {
+	margin-top: 40px;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
