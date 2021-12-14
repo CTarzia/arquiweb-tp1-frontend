@@ -33,12 +33,35 @@ const Restaurant = ({ restaurant, handleClick }) => {
 					Ver detalle
 				</button>
 			)}
-			{restaurant.appId === "2" && (
-				<Link
-					to={`/restaurante/${restaurant.id}/hacer_pedido?appId=2&name=${restaurant.name}`}
-				>
-					<button className={styles.button}> Hacer Pedido </button>
-				</Link>
+			{restaurant.appId.toString() === "2" && (
+				<div className={styles.buttonContainers}>
+					<Link to={`/menu/${restaurant?.id}?appId=${restaurant?.appId}`}>
+						<button className={styles.button}> Ver Menu </button>
+					</Link>
+					{restaurant.has_pickup && (
+						<Link
+							to={`/restaurante/${restaurant.id}/hacer_pedido?appId=2&name=${restaurant.name}`}
+						>
+							<button className={styles.button}> Hacer Pedido </button>
+						</Link>
+					)}
+
+				</div>
+			)}
+			{restaurant.appId === 3 && (
+
+				<div className={styles.buttonContainers}>
+					<Link to={`/menu/${restaurant?.branch_id}?appId=${restaurant?.appId}`}>
+						<button className={styles.button}> Ver Menu </button>
+					</Link>
+					<Link
+						to={`/restaurante/${restaurant?.branch_id}/hacer_pedido?appId=3&name=${restaurant.name}`}
+					>
+						<button className={styles.button}> Hacer Pedido </button>
+					</Link>
+				</div>
+
+
 			)}
 		</div>
 	);
